@@ -1,13 +1,13 @@
-require 'json'
+require 'mystery_shopper/game'
 
 module MysteryShopper
   class Response
     def initialize(data)
-      @data = JSON.parse(data)
+      @data = data
     end
 
     def games
-      data.fetch('games').map { |game| Game.new(game) }
+      data.dig('games', 'game').map { |game| Game.new(game) }
     end
 
     private
