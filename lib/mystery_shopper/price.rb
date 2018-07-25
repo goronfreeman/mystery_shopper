@@ -1,5 +1,4 @@
 require 'date'
-require 'datetime'
 
 module MysteryShopper
   class Price
