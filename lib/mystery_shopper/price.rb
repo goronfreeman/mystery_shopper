@@ -1,4 +1,5 @@
 require 'date'
+require 'datetime'
 
 module MysteryShopper
   class Price
@@ -23,11 +24,11 @@ module MysteryShopper
     end
 
     def sale_start
-      @sale_start ||= Date.parse(discount.fetch('start_datetime'))
+      @sale_start ||= DateTime.parse(discount.fetch('start_datetime'))
     end
 
     def sale_end
-      @sale_end ||= Date.parse(discount.fetch('end_datetime'))
+      @sale_end ||= DateTime.parse(discount.fetch('end_datetime'))
     end
 
     private
