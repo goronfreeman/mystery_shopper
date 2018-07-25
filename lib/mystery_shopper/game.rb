@@ -95,10 +95,6 @@ module MysteryShopper
 
     attr_reader :data
 
-    def base_url
-      'https://www.nintendo.com/games/detail/'
-    end
-
     def price_details
       @price_details ||= Price.new(
         Request::Price.new(nsuid).get.fetch('prices').first
