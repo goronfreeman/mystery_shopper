@@ -18,7 +18,6 @@ module MysteryShopper
       def params
         { limit: 50,
           offset: 0,
-          sale: false,
           availability: 'now',
           sort: 'title',
           direction: 'asc',
