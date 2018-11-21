@@ -16,7 +16,7 @@ module MysteryShopper
     end
 
     def url
-      @url ||= "https://www.nintendo.com/games/detail/#{data.fetch('slug')}"
+      @url ||= "https://www.nintendo.com/games/detail/#{slug}"
     end
 
     def buy_it_now?
@@ -37,6 +37,10 @@ module MysteryShopper
 
     def title
       @title ||= data.fetch('title')
+    end
+
+    def slug
+      @slug ||= data.fetch('slug')
     end
 
     def system
