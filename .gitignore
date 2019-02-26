@@ -1,3 +1,5 @@
+.byebug_history
+
 /.bundle/
 /.yardoc
 /_yardoc/
@@ -6,4 +8,3 @@
 /pkg/
 /spec/reports/
 /tmp/
-.rubocop-https---raw-githubusercontent-com-rubocop-hq-rubocop-master-config-enabled-yml

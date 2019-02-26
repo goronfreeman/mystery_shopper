@@ -1,6 +1,3 @@
-inherit_from:
-  - https://raw.githubusercontent.com/rubocop-hq/rubocop/master/config/enabled.yml
-
 Metrics/BlockLength:
   Enabled: true
   Exclude:
