@@ -12,7 +12,7 @@ module MysteryShopper
     end
 
     def categories
-      @categories ||= data.dig('categories', 'category')
+      @categories ||= Array(data.dig('categories', 'category'))
     end
 
     def url
@@ -60,7 +60,7 @@ module MysteryShopper
     end
 
     def video_link
-      @video_link ||= data.fetch('video_link')
+      @video_link ||= data['video_link']
     end
 
     def front_box_art
