@@ -56,7 +56,7 @@ module MysteryShopper
     end
 
     def nsuid
-      @nsuid ||= data.fetch('nsuid')
+      @nsuid ||= data['nsuid']
     end
 
     def video_link
