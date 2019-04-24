@@ -9,12 +9,25 @@ module MysteryShopper
         JSON.parse(Net::HTTP.get(construct_uri))
       end
 
+      def post
+        JSON.parse(Net::HTTP.new(uri.host).request(construct_request).body)
+      end
+
       private
 
-      def construct_uri
-        URI(uri).tap do |uri|
-          uri.query = URI.encode_www_form(params)
+      def construct_request
+        Net::HTTP::Post.new(construct_uri).tap do |request|
+          request.body = body.to_json
         end
+      end
+
+      def construct_uri
+        uri.query = URI.encode_www_form(params)
+      end
+
+      def params
+        { 'x-algolia-application-id' => application_id,
+          'x-algolia-api-key' => api_key }
       end
     end
   end

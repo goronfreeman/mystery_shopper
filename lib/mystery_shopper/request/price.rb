@@ -13,7 +13,7 @@ module MysteryShopper
       attr_reader :ids, :options
 
       def uri
-        'https://api.ec.nintendo.com/v1/price'
+        URI('https://api.ec.nintendo.com/v1/price')
       end
 
       def params
