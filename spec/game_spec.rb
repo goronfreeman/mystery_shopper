@@ -79,9 +79,9 @@ RSpec.describe MysteryShopper::Game do
   end
 
   describe '#free_to_start?' do
-    context 'when it is "true"' do
+    context 'when it is true' do
       before do
-        data['freeToStart'] = 'true'
+        data['freeToStart'] = true
       end
 
       it 'returns true' do
@@ -89,7 +89,7 @@ RSpec.describe MysteryShopper::Game do
       end
     end
 
-    context 'when it is "false"' do
+    context 'when it is false' do
       it 'returns false' do
         expect(subject.free_to_start?).to be false
       end
