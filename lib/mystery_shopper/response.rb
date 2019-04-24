@@ -7,7 +7,7 @@ module MysteryShopper
     end
 
     def games
-      data.fetch('games', []).fetch('game', []).map { |game| Game.new(game) }
+      data.dig('results', 0, 'hits').map { |game| Game.new(game) }
     end
 
     private
