@@ -10,7 +10,7 @@ module MysteryShopper
       end
 
       def post
-        JSON.parse(Net::HTTP.new(uri.host).request(construct_request).body)
+        JSON.parse(Net::HTTP.new(construct_uri.host).request(construct_request).body)
       end
 
       private
@@ -22,7 +22,9 @@ module MysteryShopper
       end
 
       def construct_uri
-        uri.query = URI.encode_www_form(params)
+        URI.parse(uri).tap do |uri|
+          uri.query = URI.encode_www_form(params)
+        end
       end
 
       def params

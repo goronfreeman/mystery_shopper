@@ -14,27 +14,26 @@ module MysteryShopper
       attr_reader :application_id, :api_key, :options
 
       def uri
-        URI("https://#{application_id}-dsn.algolia.net/1/indexes/*/queries")
+        "https://#{application_id}-dsn.algolia.net/1/indexes/*/queries"
       end
 
       def body
         {
-          'requests' => [
+          requests: [
             {
-              'indexName' => sort_direction,
-              'params' => "query=&#{request_params}"
+              indexName: sort_direction,
+              params: request_params
             }
           ]
         }
       end
 
       def request_params
-        { hitsPerPage: defaults[:limit],
-          page: defaults[:page],
-          facets: facets,
-          facetFilters: facet_filters }.map do |key, value|
-            "#{key}=#{value}"
-          end.join('&')
+        'query='\
+        "&hitsPerPage=#{defaults[:limit]}"\
+        "&page=#{defaults[:page]}"\
+        "&facets=#{facets}"\
+        "&facetFilters=#{facet_filters}"
       end
 
       def facets
@@ -69,9 +68,10 @@ module MysteryShopper
       end
 
       def sort_direction
-        return ['noa_aem_game_en_us'] if defaults[:sort] == 'featured'
+        base = 'noa_aem_game_en_us'
+        return base if defaults[:sort] == 'featured'
 
-        ['noa_aem_game_en_us_',
+        [base,
          defaults[:sort],
          defaults[:direction]].join('_')
       end
