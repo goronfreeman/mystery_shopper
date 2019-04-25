@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mystery_shopper (0.1.6)
+    mystery_shopper (0.2.0)
 
 GEM
   remote: https://rubygems.org/

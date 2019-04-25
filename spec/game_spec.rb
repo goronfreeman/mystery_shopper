@@ -7,30 +7,42 @@ RSpec.describe MysteryShopper::Game do
 
   let(:data) do
     {
-      'categories' => { 'category' => %w[Arcade Multiplayer Party Puzzle] },
-      'slug' => 'breakforcist-battle-switch',
-      'buyitnow' => 'false',
-      'release_date' => 'Apr 12, 2018',
-      'digitaldownload' => 'false',
-      'nso' => 'false',
-      'free_to_start' => 'false',
-      'title' => '#Breakforcist Battle',
-      'system' => 'Nintendo Switch',
-      'id' => 'oNfMa9bCbSistTheDdqCtqZ3Lwk_WBw8',
-      'ca_price' => '12.99',
-      'number_of_players' => 'up to 4 players',
-      'nsuid' => '70010000003782',
-      'eshop_price' => '9.99',
-      'front_box_art' => 'https://media.nintendo.com/nintendo/bin/S9233-zQTduo1uWckvUcVqikBSFMUzxZ/7hWl7WrFj-twgIgF1fB6a8Y74qMEGm59.png',
-      'game_code' => 'HACNAK98A',
-      'buyonline' => 'true'
+      'type' => 'game',
+      'locale' => 'en_US',
+      'url' => '/games/detail/overcooked-2-switch',
+      'title' => 'Overcooked! 2',
+      'description' => 'Sample description.',
+      'lastModified' => 1555628882577,
+      'id' => 'bMo0R6zC5D5ewf5wTc424zc7RQnDFSIp',
+      'nsuid' => '70010000003402',
+      'slug' => 'overcooked-2-switch',
+      'boxArt' => '/content/dam/noa/en_US/games/switch/o/overcooked-2-switch/Switch_Overcooked2_box.png',
+      'gallery' => '1nNjVtaDE6yijrWKfJL5ebXMPSh-mlaS',
+      'platform' => 'Nintendo Switch',
+      'releaseDateMask' => '2018-08-06T00:00:00.000-07:00',
+      'characters' => ['Mario'],
+      'categories' => %w[Strategy Party Simulation],
+      'msrp' => 24.99,
+      'salePrice' => 18.74,
+      'esrb' => 'Everyone',
+      'esrbDescriptors' => ['Users Interact'],
+      'virtualConsole' => 'na',
+      'generalFilters' => ['DLC available', 'Online Play via Nintendo Switch Online', 'Deals'],
+      'filterShops' => ['At retail', 'On Nintendo.com'],
+      'filterPlayers' => ['3+', '2+', '1+'],
+      'players' => 'up to 4 players',
+      'featured' => true,
+      'freeToStart' => false,
+      'priceRange' => '$10 - $19.99',
+      'availability' => ['Available now'],
+      'objectID' => '85d4db29-0a15-3924-a43b-7302d15d9f5f'
     }
   end
 
   before do
     allow(subject).to receive(:price_details).and_return(
       MysteryShopper::Price.new(
-        'title_id' => 70010000003782,
+        'title_id' => 70_010_000_003_782,
         'sales_status' => 'onsale',
         'regular_price' => {
           'amount' => '$9.99',
@@ -48,111 +60,112 @@ RSpec.describe MysteryShopper::Game do
     )
   end
 
-  describe '#categories' do
-    context 'when there is only one category' do
-      before do
-        data['categories']['category'] = 'Arcade'
-      end
-
-      it 'returns an array of categories' do
-        expect(subject.categories).to eq ['Arcade']
-      end
-    end
-
-    context 'when there are multiple categories' do
-      it 'returns an array of categories' do
-        expect(subject.categories).to eq %w[Arcade Multiplayer Party Puzzle]
-      end
-    end
-  end
-
   describe '#url' do
     it 'returns the correct URL' do
-      expect(subject.url).to eq 'https://www.nintendo.com/games/detail/breakforcist-battle-switch'
-    end
-  end
-
-  describe '#buy_it_now?' do
-    context 'when it is "true"' do
-      before do
-        data['buyitnow'] = 'true'
-      end
-
-      it 'returns true' do
-        expect(subject.buy_it_now?).to be true
-      end
-    end
-
-    context 'when it is "false"' do
-      it 'returns false' do
-        expect(subject.buy_it_now?).to be false
-      end
-    end
-  end
-
-  describe '#release_date' do
-    it 'returns the correct Date object' do
-      expect(subject.release_date).to eq Date.new(2018, 4, 12)
-    end
-  end
-
-  describe '#digital_download?' do
-    context 'when it is "true"' do
-      before do
-        data['digitaldownload'] = 'true'
-      end
-
-      it 'returns true' do
-        expect(subject.digital_download?).to be true
-      end
-    end
-
-    context 'when it is "false"' do
-      it 'returns false' do
-        expect(subject.digital_download?).to be false
-      end
-    end
-  end
-
-  describe '#free_to_start?' do
-    context 'when it is "true"' do
-      before do
-        data['free_to_start'] = 'true'
-      end
-
-      it 'returns true' do
-        expect(subject.free_to_start?).to be true
-      end
-    end
-
-    context 'when it is "false"' do
-      it 'returns false' do
-        expect(subject.free_to_start?).to be false
-      end
+      expect(subject.url).to eq 'https://www.nintendo.com/games/detail/overcooked-2-switch'
     end
   end
 
   describe '#title' do
     it 'returns the game title' do
-      expect(subject.title).to eq '#Breakforcist Battle'
+      expect(subject.title).to eq 'Overcooked! 2'
     end
   end
 
-  describe '#slug' do
-    it 'returns the game slug' do
-      expect(subject.slug).to eq 'breakforcist-battle-switch'
-    end
-  end
-
-  describe '#system' do
-    it 'returns the game system' do
-      expect(subject.system).to eq 'Nintendo Switch'
+  describe '#description' do
+    it 'returns the game description' do
+      expect(subject.description).to eq 'Sample description.'
     end
   end
 
   describe '#id' do
     it 'returns the game ID' do
-      expect(subject.id).to eq 'oNfMa9bCbSistTheDdqCtqZ3Lwk_WBw8'
+      expect(subject.id).to eq 'bMo0R6zC5D5ewf5wTc424zc7RQnDFSIp'
+    end
+  end
+
+  describe '#nsuid' do
+    it 'returns the game NSUID' do
+      expect(subject.nsuid).to eq '70010000003402'
+    end
+  end
+
+  describe '#slug' do
+    it 'returns the game slug' do
+      expect(subject.slug).to eq 'overcooked-2-switch'
+    end
+  end
+
+  describe '#front_box_art' do
+    it 'returns the URL of the game box art' do
+      expect(subject.front_box_art).to eq 'https://www.nintendo.com/content/dam/noa/en_US/games/switch/o/overcooked-2-switch/Switch_Overcooked2_box.png'
+    end
+  end
+
+  describe '#gallery' do
+    it 'returns the gallery' do
+      expect(subject.gallery).to eq '1nNjVtaDE6yijrWKfJL5ebXMPSh-mlaS'
+    end
+  end
+
+  describe '#platform' do
+    it 'returns the game platform' do
+      expect(subject.platform).to eq 'Nintendo Switch'
+    end
+  end
+
+  describe '#release_date' do
+    it 'returns the correct Date object' do
+      expect(subject.release_date).to eq Date.new(2018, 8, 6)
+    end
+  end
+
+  describe '#characters' do
+    it 'returns an array of characters' do
+      expect(subject.characters).to eq %w[Mario]
+    end
+  end
+
+  describe '#categories' do
+    it 'returns an array of categories' do
+      expect(subject.categories).to eq %w[Strategy Party Simulation]
+    end
+  end
+
+  describe '#esrb' do
+    it 'returns the ESRB rating' do
+      expect(subject.esrb).to eq 'Everyone'
+    end
+  end
+
+  describe '#esrb_descriptors' do
+    it 'returns an array of ESRB descriptors' do
+      expect(subject.esrb_descriptors).to eq ['Users Interact']
+    end
+  end
+
+  # This appears to be "na" for every result right now.
+  describe '#virtual_console' do
+    it 'returns "na"' do
+      expect(subject.virtual_console).to eq 'na'
+    end
+  end
+
+  describe '#general_filters' do
+    it 'returns an array of general filters that match the game' do
+      expect(subject.general_filters).to eq ['DLC available', 'Online Play via Nintendo Switch Online', 'Deals']
+    end
+  end
+
+  describe '#filter_shops' do
+    it 'returns an array of shop filters that match the game' do
+      expect(subject.filter_shops).to eq ['At retail', 'On Nintendo.com']
+    end
+  end
+
+  describe '#filter_players' do
+    it 'returns an array of player filters that match the game' do
+      expect(subject.filter_players).to eq ['3+', '2+', '1+']
     end
   end
 
@@ -162,57 +175,51 @@ RSpec.describe MysteryShopper::Game do
     end
   end
 
-  describe '#nsuid' do
-    it 'returns the game NSUID' do
-      expect(subject.nsuid).to eq '70010000003782'
-    end
-  end
-
-  describe '#video_link' do
-    context 'when the video link is present' do
-      before do
-        data['video_link'] = '82azBzZzE6_Yl-SGf4PVOtshsLwPpD1H'
-      end
-
-      it 'returns the game video link' do
-        expect(subject.video_link).to eq '82azBzZzE6_Yl-SGf4PVOtshsLwPpD1H'
-      end
-    end
-
-    context 'when the video link is missing' do
-      it 'returns nil' do
-        expect(subject.video_link).to be nil
-      end
-    end
-  end
-
-  describe '#front_box_art' do
-    it 'returns the URL of the game box art' do
-      expect(subject.front_box_art).to eq 'https://media.nintendo.com/nintendo/bin/S9233-zQTduo1uWckvUcVqikBSFMUzxZ/7hWl7WrFj-twgIgF1fB6a8Y74qMEGm59.png'
-    end
-  end
-
-  describe '#game_code' do
-    it 'returns the game game code' do
-      expect(subject.game_code).to eq 'HACNAK98A'
-    end
-  end
-
-  describe '#buy_online?' do
-    context 'when it is "true"' do
+  describe '#featured?' do
+    context 'when it is true' do
       it 'returns true' do
-        expect(subject.buy_online?).to be true
+        expect(subject.featured?).to be true
       end
     end
 
-    context 'when it is "false"' do
+    context 'when it is false' do
       before do
-        data['buyonline'] = 'false'
+        data['featured'] = false
       end
 
       it 'returns false' do
-        expect(subject.buy_online?).to be false
+        expect(subject.featured?).to be false
       end
+    end
+  end
+
+  describe '#free_to_start?' do
+    context 'when it is true' do
+      before do
+        data['freeToStart'] = true
+      end
+
+      it 'returns true' do
+        expect(subject.free_to_start?).to be true
+      end
+    end
+
+    context 'when it is false' do
+      it 'returns false' do
+        expect(subject.free_to_start?).to be false
+      end
+    end
+  end
+
+  describe '#price_range' do
+    it 'returns the price range of the game' do
+      expect(subject.price_range).to eq '$10 - $19.99'
+    end
+  end
+
+  describe '#availability' do
+    it 'returns an array of availability statuses' do
+      expect(subject.availability).to eq ['Available now']
     end
   end
 
