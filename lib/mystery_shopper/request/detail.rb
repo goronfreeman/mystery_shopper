@@ -60,11 +60,9 @@ module MysteryShopper
       end
 
       def availability
-        [
-          defaults[:availability].map do |avail|
-            "availability:#{mappings.dig(:availability, avail)}"
-          end.join(', ')
-        ]
+        defaults[:availability].map do |avail|
+          "availability:#{mappings.dig(:availability, avail)}"
+        end
       end
 
       def sort_direction
