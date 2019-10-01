@@ -9,7 +9,7 @@ module MysteryShopper
     end
 
     def url
-      @url ||= "#{base_url}#{data.fetch('url')}"
+      @url ||= "#{base_url}#{data.fetch('url', "/games/detail/#{slug}")}"
     end
 
     def title
@@ -36,7 +36,7 @@ module MysteryShopper
       @front_box_art ||= "#{base_url}#{data.fetch('boxArt')}"
     end
 
-    # TODO: Figure out what the value  returned here actually is.
+    # TODO: Figure out what the value returned here actually is.
     def gallery
       @gallery ||= data.fetch('gallery')
     end
@@ -82,7 +82,7 @@ module MysteryShopper
     end
 
     def number_of_players
-      @number_of_players ||= data.fetch('players')
+      @number_of_players ||= data.fetch('players', 'unknown')
     end
 
     def featured?
